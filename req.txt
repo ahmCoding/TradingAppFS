@@ -1,0 +1,7 @@
+Ta-Lib
+alpaca_trade_api
+pandas
+fastapi
+uvicorn
+numpy
+Jinja2

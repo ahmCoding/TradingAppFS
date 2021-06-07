@@ -1,0 +1,11 @@
+#ToDo: check the date of today and if it is a weekeend turn it to a friday to get good result
+    # get new date
+
+# check if the stocks in db are up to date and if every stock in the existing list is valied--> updateDB.py
+# edit list of strategy_details
+
+# move candle stick filter to another part of program for example in part with watchlist of Stocks and stock_strategies
+#alle 2 tage indicator_stock -Tabelle updaten
+
+
+# kharid kaf

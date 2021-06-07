@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+        <meta charset="UTF-8">
+        <title>newApp</title>
+    </head>
+    <body>
+        <div class="ui container">
+
+            <!Menue>
+                    <div class="ui secondary  menu">
+          <a href="/" class="active item">
+            Stocks
+          </a>
+          <a href="/strategies" class="item">
+            Strategies
+          </a>
+          <a href="/trades" class="item">
+            Trades History
+          </a>
+            <a href="/watchlist" class="item">
+            Watchlist
+          </a>
+          <div class="right menu">
+            <div class="item">
+              <div class="ui icon input">
+                <input type="text" placeholder="Search...">
+                <i class="search link icon"></i>
+              </div>
+            </div>
+            <a class="ui item">
+              Logout
+            </a>
+          </div>
+        </div>
+            <!Menu Ende>
+
+    {%block content %}
+
+    {% endblock %}
+
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,30 @@
+{%extends "layout.html"%}
+{%block content%}
+
+<form method="get">
+            <select name="candlestickPattern">
+                {%for pattern in candlestickPatterns%}
+                <option {%if pattern == request.query_params.candlestickPattern%} selected="selected" {%endif%}value={{pattern}}>{{candlestickPatterns[pattern]}}</option>
+                {%endfor%}
+                <input type="submit" value="Scan" />
+            </select>
+        </form>
+<table class="ui striped table">
+                <thead>
+                <tr>
+                <th>symbol</th>
+                <th>name</th>
+                <th>signal</th>
+                </tr>
+                </thead>
+                <tbody>
+                {%for stock in stocks%}
+                <tr>
+                <td>{{stock.symbol}}</td>
+                <td><a href="stock/{{stock.symbol}}">{{stock.name}}</a></td>
+                <td>{{stock.signal}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+</table>
+{%endblock%}
