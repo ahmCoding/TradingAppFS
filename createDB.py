@@ -53,7 +53,7 @@ cursor.execute("""
         foreign key (stock_id) references stocks(id),
         foreign key (strategy_id) references strategy(id))
 """)
-strategies=['opening_range_breakout','opening_range_breakdown','Bollinger_Bands']
+# strategies=['opening_range_breakout','opening_range_breakdown','Bollinger_Bands']
 # for str in strategies:
 #     cursor.execute("""
 #     insert into strategy (name) values (?)

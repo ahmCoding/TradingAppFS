@@ -5,14 +5,14 @@ from datetime import date
 import pandas as pd
 import talib
 from  notification import sendEmailNotification
-from  datetime import datetime
+import datetime
 #from timeZone import is_dst
 from helper import *
 
 def longBB():
     api = alpacaApi()# or use ENV Vars shown below
     clock=api.get_clock()
-    today=date.today().isoformat()
+    today=datetime.date.today().isoformat()
     #check if the markt is open
     if clock.is_open:
 
@@ -89,7 +89,7 @@ def longBB():
                                 type='market',
                                 time_in_force='day')
                                 tralingStop(symbol=symbol,side='buy',quantity=quantity,atiTrail=True)
-                                print(f"new Order at {datetime.now()} places by {symbol}")
+                                print(f"new Order at {datetime.datetime.now()} places by {symbol}")
                                 message.append(f"new Long Trade for {symbol} with price {curentC} , range of {barRange} , TP: {tp} and SL: {sl}\n\n")
                                 #cursor.execute("delete from stock_strategy where stock_id=(select id from stock where symbol=?) ",(symbol,))
                                 #connection.commit()
@@ -103,7 +103,7 @@ def longBB():
 def shortBB():
     api = tradeapi.REST(appConfig.apiKey, appConfig.secretKey,base_url=appConfig.baseUrl)  # or use ENV Vars shown below
     clock = api.get_clock()
-    today = date.today().isoformat()
+    today = datetime.date.today().isoformat()
 
     # check if the markt is open
     if clock.is_open:
@@ -175,7 +175,7 @@ def shortBB():
                                     order_class='bracket',
                                     stop_loss={'stop_price': sl},
                                     take_profit={'limit_price': tp})
-                                print(f"new Order at {datetime.now()} places by {symbol}")
+                                print(f"new Order at {datetime.datetime.now()} places by {symbol}")
                                 message.append(
                                     f"new Long Trade for {symbol} with price {curentC} , range of {barRange} , TP: {tp} and SL: {sl}\n\n")
                                 # cursor.execute("delete from stock_strategy where stock_id=(select id from stock where symbol=?) ",(symbol,))

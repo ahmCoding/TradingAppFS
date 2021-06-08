@@ -11,7 +11,7 @@ from patterns import patterns
 import numpy as np
 import  pandas as pd
 
-
+#uvicorn main:app --reload
 
 app=FastAPI()
 @app.get("/")

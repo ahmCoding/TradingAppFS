@@ -5,3 +5,4 @@ fastapi
 uvicorn
 numpy
 Jinja2
+backtrader

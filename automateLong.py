@@ -13,7 +13,6 @@ def autoTradeLong():
     clock=api.get_clock()
     #check if the markt is open
     if clock.is_open:
-
         connection=sqlite3.connect(appConfig.dbAdress)
         #change tuple to object to accsess them like dics
         connection.row_factory=sqlite3.Row

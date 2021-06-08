@@ -27,7 +27,7 @@ def indicatorsPrices():
             stock_id=cursor.fetchone()[0]
             #cursor.execute("insert into indicator_stock (stock_id,sma_20) values (?,?)",(stock_id,sma_20))
             #detect ranging of Price
-            priceRanging=detectStockpriceRange(toCalc)
+            priceRanging=detectStockpriceRange(closes=toCalc,procentage=2.3)
             #cursor.execute("insert into indicator_stock (range) values (?) where stock_id=?", (priceRanging,stock_id))
             #insert sma and rang
             cursor.execute("insert into indicator_stock (stock_id,sma_20,range) values (?,?,?)",(stock_id,sma_20,priceRanging))

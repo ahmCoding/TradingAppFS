@@ -46,7 +46,6 @@ for company_symbol in companies:
     while startDate<endDate:
         tmpStart=pd.Timestamp(startDate,tz=EB).isoformat()
         tmpEnd=pd.Timestamp(startDate+timedelta(days=4),tz=EB).isoformat()
-        print(f"processing {company_symbol} from {tmpStart} to {tmpEnd}")
         barsets = api.get_barset(company_symbol, timeF,limit=1000, start=tmpStart, end=tmpEnd).df
         # resample downloaded panda data frame with 5 min frequency and if any bar is missing ,fill it with last bar
         barsets=barsets.resample('5min').ffill()
@@ -57,7 +56,8 @@ for company_symbol in companies:
                            (stockId[company_symbol],index.tz_localize(None).isoformat(),bar[company_symbol]['open'],bar[company_symbol]['high'],\
                             bar[company_symbol]['low'],bar[company_symbol]['close'],bar[company_symbol]['volume']))
         startDate+=timedelta(days=7)
-        connection.commit()
+    print(f"processing {company_symbol} from {tmpStart} to {tmpEnd}")
+    connection.commit()
 
 
 

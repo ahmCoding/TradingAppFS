@@ -5,7 +5,7 @@ import pandas as pd
 from helper import *
 
 # stratDate= -1 means that DB is empty and needs to be initialized
-def setupForDB(startDate,endDate):
+def setupForDB(startDate,endDate,dbInit:bool=False):
     # EB = 'America/New_York'
     # if startDate!=-1:
     #     start=pd.Timestamp(startDate, tz=EB).isoformat()
@@ -39,7 +39,7 @@ def setupForDB(startDate,endDate):
 
         for symbol in barsets:
             for bar in barsets[symbol]:
-                if startDate !=-1:
+                if not dbInit:
                     cursor.execute("select date from stock_price where stock_id=?",(stockId[symbol],))
                     dates=cursor.fetchall()
                     # check if the date is already in table
@@ -70,7 +70,7 @@ def keep_db_clean():
             cursor.execute("delete from stock_price where date in "
                            "(select date from stock_price where stock_id=? order by date limit (?)) and stock_id =?",(r['id'],rowToDelete,r['id']))
             print(f"cleaning stock {r['id']} {rowToDelete} rows!")
-            connection.commit()
+    connection.commit()
 
 
 
@@ -90,8 +90,8 @@ def keep_db_clean():
 # EB = 'America/New_York'
 # t=endT=pd.Timestamp('2021-03-01', tz=EB).isoformat()
 
-start,end=calcDate(daysAgo=65)
-setupForDB(startDate=start,endDate=end)
+#start,end=calcDate(daysAgo=65)
+#setupForDB(startDate=start,endDate=end,dbInit=True)
 keep_db_clean()
 
 #jon the tables to check the correcnes of function

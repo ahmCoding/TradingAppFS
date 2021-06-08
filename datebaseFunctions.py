@@ -10,6 +10,8 @@ cursor.execute("""Drop Table stock_strategy """)
 cursor.execute("""Drop Table filtered_stocks """)
 cursor.execute("""Drop Table indicator_stock""")
 cursor.execute("Drop table watchlist")
+cursor.execute("Drop table minit_stock_price")
+
 
 
 
