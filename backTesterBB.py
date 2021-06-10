@@ -8,6 +8,9 @@ class bollingerBands(bt.Strategy):
 
     def __init__(self):
         self.dataclose = self.datas[0].close
+        self.currentbars=self.datas[0]
+        self.buyTP=None
+        self.sellTP=None
         # To keep track of pending orders and buy price/commission
         self.order = None
         self.buyprice = None
@@ -44,28 +47,30 @@ class bollingerBands(bt.Strategy):
         self.order = None
 
     def next(self):
-        if self.bband.lines.bot:
-            current_bar = self.datas[0]
-            previous_bar = self.datas[-1]
-            cbBarish= True if current_bar.close<current_bar.open else False
+        #print(self.currentbar.close[0])
+        #print(self.currentbar.close[-1])
+        if self.bband.lines.bot[0]:
+            # current_bar = self.data[0]
+            # previous_bar = self.data[-1]
+            cbBarish= True if self.currentbars.close[0]<self.currentbars.open[0] else False
             #pbBeatish= True if previous_bar.close<previous_bar.open  else False
-
-            if self.bband.lines.top < previous_bar.close and self.bband.top > current_bar.close and cbBarish and not self.position:
+            if self.bband.lines.top[0] < self.currentbars.close[-1] and self.bband.top[0] > self.currentbars.close[0] and cbBarish and not self.position:
                 self.order=self.sell()
                 self.log('SELL CREATE, %.2f' % self.dataclose[0])
                 self.redline=True
+                self.sellTP=self.bband.mid[0]-(self.bband.mid[0]*0.25)
 
-            elif self.bband.lines.bot < previous_bar.close and self.bband.bot < current_bar.close and not cbBarish and not self.position:
+            elif self.bband.lines.bot[0] > self.currentbars.close[-1] and self.bband.bot[0]< self.currentbars.close[0] and not cbBarish and not self.position:
                 self.order = self.buy()
                 self.log('BUY CREATE, %.2f' % self.dataclose[0])
                 self.blueline=True
-
+                self.buyTP=self.bband.mid[0]*1.25
 
             elif self.position:
-                if self.redline and self.dataclose <self.bband.mid:
+                if self.redline and self.dataclose[0] <= self.sellTP:
                     self.close()
                     self.log('Close Sell at Price  %.2f' % self.dataclose[0])
-                elif self.blueline and self.dataclose>self.bband.mid:
+                elif self.blueline and self.dataclose[0]>=self.buyTP:
                     self.close()
                     self.log('Close Buy at Price  %.2f' % self.dataclose[0])
 
